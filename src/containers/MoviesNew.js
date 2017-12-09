@@ -15,12 +15,15 @@ class MoviesNew extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     // Destructure addMovie and history from the components props
-    const { addMovie, history } = this.props;
+    const { addMovie, history, movies} = this.props;
     // Create the movie with the Redux action
     addMovie(this.state);
     // redirect to /movies route
-    history.push('/movies')
+    const newMovieId = movies.pop().id+1
+
+    history.push(`/movies/${newMovieId}`)
   }
+
 
   handleOnChange = event => {
     this.setState({
@@ -41,4 +44,10 @@ class MoviesNew extends Component {
   }
 }
 
-export default connect(null, { addMovie })(MoviesNew)
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies
+  };
+}
+
+export default connect(mapStateToProps, { addMovie })(MoviesNew)
