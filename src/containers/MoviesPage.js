@@ -10,12 +10,13 @@ const MoviesPage = ({ match, movies }) =>
   <div>
     <MoviesList movies={movies} />
     <Switch>
-      <Route exact path={`${match.url}/new`} component={MoviesNew} />
-      <Route exact path={`${match.url}/:movieId`} component={MovieShow}/>
       <Route exact path={match.url} render={() => (
         <h3>Please select a Movie from the list.</h3>
       )}/>
+      <Route path={`${match.url}/new`} component={MoviesNew} />
+      <Route path={`${match.url}/:movieId`} component={MovieShow}/>
     </Switch>
+
   </div>;
 
 const mapStateToProps = (state) => {
